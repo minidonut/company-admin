@@ -1,47 +1,26 @@
 <!DOCTYPE html>
-<html lang="en-US">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>grid-layout</title>
+    <link rel="stylesheet" href="./stylesheets/style.css" type="text/css" />
 </head>
-
 <body>
-
-    <div id="wrapper">
-        <div id="app">
-            <!-- Raised button with ripple -->
-            <template v-for="man in company">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-            v-on:click="greet">
-              {{man.name}} {{man.location}}
-            </button>
-            </template>
-
-        </div>
+    <div id="content">
+        
     </div>
-
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
     <script>
         /*global location*/
-        document.write('<script src="https://' + (location.host || 'localhost').split(':')[0] +
+        document.write('<script src="https://' + location.host.split(':')[0] +
             ':8081/livereload.js?snipver=1"></' + 'script>')
     </script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="./app.js"></script>
-    <link rel="stylesheet" href="./stylesheets/style.css" type="text/css" />
 </body>
-
 </html>
