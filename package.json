@@ -1,0 +1,29 @@
+{
+  "name": "company-admin",
+  "version": "1.0.0",
+  "description": "web-app for administrating members of a company",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minidonut/company-admin.git"
+  },
+  "keywords": [
+    "web-app"
+  ],
+  "author": "minidonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/minidonut/company-admin/issues"
+  },
+  "homepage": "https://github.com/minidonut/company-admin#readme",
+  "dependencies": {
+    "express": "^4.16.0",
+    "livereload": "^0.6.2",
+    "vue": "^2.4.4",
+    "vue-mdl": "^1.1.1"
+  }
+}
