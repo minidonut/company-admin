@@ -1,32 +1,50 @@
-body{
-    color: #fff;
-    font-family: sans-serif;
-    text-align: center;
-}
+body {
+  color: #fff;
+  font-family: sans-serif;
+  text-align: center; }
 
-#content{
+#content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 960px;
+  margin: 20px 20px 20px 20px; }
+  #content .column {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 960px;
-    margin: 0 auto;
-}
-
-#content .column{
-    background: #777;
+    background: white;
     margin: 1px;
-    padding: 10px;
-}
+    padding: 1px;
+    float: left; }
 
-#img1{
-    background: #555;
-    min-width: 80px;
-    min-height: 80px;
-    border-radius: 50%;
-    padding: 0;
-    margin: 0;
-}
+.mdl-button {
+  height: auto;
+  color: #fff; }
 
-img{
-    width: 40px;
-    height: 40px;
-}
+.man {
+  background: #3cb878;
+  margin: 1px;
+  padding: 1px;
+  height: 50px; }
+
+.dummy {
+  background: #fff;
+  margin: 1px;
+  padding: 1px;
+  height: 50px; }
+
+.raised {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.24);
+  background: #aae3c6; }
+
+.mdl-button:hover {
+  background: #aae3c6; }
+
+#controllers {
+  margin: 0 auto 10px auto;
+  padding: 5px; }
+  #controllers div {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); }
+  #controllers button {
+    margin: 3px; }
+
+/*# sourceMappingURL=style.css.map */
