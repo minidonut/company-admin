@@ -3,48 +3,107 @@ body {
   font-family: sans-serif;
   text-align: center; }
 
+#wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); }
+
+#sidebar {
+  grid-column: 1/3;
+  background: #333; }
+
+#main {
+  grid-column: 3/13; }
+
 #content {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   max-width: 960px;
-  margin: 20px 20px 20px 20px; }
+  margin: 20px 4px 20px 4px; }
   #content .column {
     display: grid;
-    background: white;
+    background: #fff;
     margin: 1px;
     padding: 1px;
     float: left; }
 
+.wrapper.mdl-button {
+  height: auto; }
+
 .mdl-button {
-  height: auto;
   color: #fff; }
 
+#others {
+  background: #fff; }
+  #others .mdl-button {
+    color: #222; }
+  #others input {
+    color: #222; }
+
 .man {
-  background: #3cb878;
   margin: 1px;
-  padding: 1px;
+  padding: 0px 0px 1px 0px;
   height: 50px; }
+  .man div {
+    padding: 0px;
+    margin: 0px; }
+  .man .name {
+    font-size: 1em; }
+  .man .action-location {
+    font-size: 0.5em; }
+  .man .detail {
+    font-size: 0.5em; }
 
 .dummy {
   background: #fff;
   margin: 1px;
-  padding: 1px;
+  padding: 0px 0px 1px 0px;
   height: 50px; }
 
-.raised {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.24);
+.raised.work {
+  background: #f6bebd; }
+.raised.base {
   background: #aae3c6; }
-
-.mdl-button:hover {
-  background: #aae3c6; }
+.raised.education {
+  background: #ffe199; }
+.raised.duty {
+  background: #84d6fd; }
+.raised.vacation {
+  background: white; }
+.raised.hospital {
+  background: #c2c2c2; }
+.raised.training {
+  background: #ffd095; }
 
 #controllers {
-  margin: 0 auto 10px auto;
-  padding: 5px; }
-  #controllers div {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); }
+  margin: 0 auto 0 auto;
+  padding: 20px 3px 3px 3px; }
   #controllers button {
-    margin: 3px; }
+    font-size: 0.5em;
+    margin: 0px 0px 20px 0px; }
+  #controllers hr {
+    margin: 0px;
+    padding: 0px; }
+
+/* from here, color change */
+.base {
+  background: #3cb878; }
+
+.work {
+  background: #E53935; }
+
+.vacation {
+  background: #BDBDBD; }
+
+.duty {
+  background: #039BE5; }
+
+.hospital {
+  background: #757575; }
+
+.training {
+  background: #FB8C00; }
+
+.education {
+  background: #FFB300; }
 
 /*# sourceMappingURL=style.css.map */

@@ -15,31 +15,53 @@ $(document).ready(function($) {
     $(".man").click(function(event) {
         var a = $(this)
         if (a.hasClass('raised')) {
+            a.removeClass('mdl-shadow--2dp');
             a.removeClass('raised');
             selected.pop(a);
         }
         else {
+            a.addClass('mdl-shadow--2dp');
             a.addClass('raised');
             selected.push(a);
         }
         event.stopPropagation();
-        console.log(selected.length);
     });
     
     $("#content").click(function(){
        selected.forEach(function(v,i){
+           v.removeClass('mdl-shadow--2dp');
            v.removeClass('raised');
        });
        selected = [];
-       console.log("clean the selected arr");
     });
     
     
-    $("#work").click(function(){
+    $('.action').click(function(event){
+        var id = event.currentTarget.id;
+        if (id === "distribution" || id === "dish" || id ==="guard"){
+            id = "duty";
+        }
+        
         selected.forEach(function(v,i){
-            v.css("background", "#E53935");
-        })
+           v.removeClass('mdl-shadow--2dp');
+           v.removeClass('raised');
+           let arr = v["0"].classList;
+           v.removeClass(arr[arr.length-1]);
+           v.addClass(id);
+            
+        });
+        selected = [];
+    });
+    
+    $("#commit").click(function(){
+        console.log($('#where')["0"].value);
+    });
+    
+    $("#cancel").click(function(){
+        $('#where')["0"].value = "";
+        $('#details')["0"].value = "";
     })
+    
     
     
     
