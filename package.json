@@ -26,5 +26,8 @@
     "sass": "^1.0.0-beta.2",
     "vue": "^2.4.4",
     "vue-mdl": "^1.1.1"
+  },
+  "devDependencies": {
+    "vue-cli": "^2.9.1"
   }
 }
