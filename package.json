@@ -1,33 +1,28 @@
 {
   "name": "company-admin",
+  "description": "A Vue.js project",
   "version": "1.0.0",
-  "description": "web-app for administrating members of a company",
-  "main": "server.js",
+  "author": "minidonut <nycom13@gmail.com>",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --host $IP --port $PORT --public $C9_HOSTNAME",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/minidonut/company-admin.git"
-  },
-  "keywords": [
-    "web-app"
-  ],
-  "author": "minidonut",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/minidonut/company-admin/issues"
-  },
-  "homepage": "https://github.com/minidonut/company-admin#readme",
   "dependencies": {
-    "express": "^4.16.0",
-    "livereload": "^0.6.2",
-    "sass": "^1.0.0-beta.2",
-    "vue": "^2.4.4",
-    "vue-mdl": "^1.1.1"
+    "vue": "^2.4.4"
   },
   "devDependencies": {
-    "vue-cli": "^2.9.1"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.4",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
   }
 }
