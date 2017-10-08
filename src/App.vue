@@ -1,60 +1,81 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <man-table></man-table>
+    <action-button v-on:handleButton="handleButton($event)"></action-button>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import manTable from './components/ManTable.vue';
+  import actionButton from './components/ActionButton.vue';
+
+
+  export default {
+    components: {
+      'man-table': manTable,
+      'action-button': actionButton
+    },
+    data() {
+      return {
+        isButtonClicked: false,
+        buttonType: ""
+      }
+    },
+    methods: {
+      handleButton: function(buttonType){
+        this.buttonType = buttonType;
+        this.isButtonClicked = true;
+      }
+    },
+    computed: {
+
+    },
+    created() {
+
     }
   }
-}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @media (max-width: 960px) {
+    html {
+      font-size: 16px;
+    }
+  }
 
-h1, h2 {
-  font-weight: normal;
-}
+  @media (max-width: 480px) {
+    html {
+      font-size: 12px;
+    }
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  .has-ripple {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  .ripple {
+    background: #e0e0e0;
+    position: absolute;
+    opacity: 0.5;
+    animation: ripple 1.8s cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 50%;
+    backface-visibility: hidden;
+    pointer-events: none;
+  }
 
-a {
-  color: #42b983;
-}
+  @keyframes ripple {
+    0% {
+      transform: translateX(-50%) translateY(-50%) scale(1);
+
+    }
+    80% {
+      transform: translateX(-50%) translateY(-50%) scale(3);
+    }
+    100% {
+      transform: translateX(-50%) translateY(-50%) scale(3);
+      opacity: 0;
+    }
+  }
 </style>

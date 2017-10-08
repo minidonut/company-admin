@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" type="text/css" />
-    
-    <title>company-admin</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="/dist/build.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" type="text/css" />
+
+  <title>company-admin</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="/dist/build.js"></script>
+  
+  
+  <script>
+  /*global $*/
+    $(".has-ripple").click(function(e) {
+      console.log("jQuery Ripple CLicked");
+      var ripple = $("<div class='ripple'>");
+      var offsetX = e.pageX - $(this).offset().left;
+      var offsetY = e.pageY - $(this).offset().top;
+      var size = .8 * ($(this).width() > $(this).height() ? $(this).width() : $(this).height());
+      ripple.css({ left: offsetX, top: offsetY, height: size, width: size });
+      ripple.one("webkitAnimationEnd oanimationend msAnimationEnd animationend", function() { $(this).remove() });
+      $(this).append(ripple);
+    });
+  </script>
+</body>
+
 </html>
 <!DOCTYPE html>
 <html lang="en">
-
