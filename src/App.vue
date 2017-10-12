@@ -1,60 +1,64 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <ca-header></ca-header>
+    <hr>
+    <man-table></man-table>
+    <hr>
+    <change-state></change-state>
+    <hr>
+    <ca-summary></ca-summary>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+import ManTable from './components/ManTable.vue';
+import ChangeState from './components/ChangeState.vue';
+import Summary from './components/Summary.vue';
+import Header from './components/Header.vue';
+
+  export default {
+    name: 'app',
+    components:{
+      'man-table' : ManTable,
+      'change-state': ChangeState,
+      'ca-summary': Summary,
+      'ca-header': Header
+    },
+    data() {
+      return {
+
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
 
-h1, h2 {
-  font-weight: normal;
-}
+  @media (max-width: 960px) {
+    html {
+      font-size: 16px;
+    }
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+  @media (max-width: 480px) {
+    html {
+      font-size: 12px;
+    }
+  }
+  hr{
+    background: #212121;
+    border: 0;
+    height: 0;
+    margin: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  
+  
 </style>
