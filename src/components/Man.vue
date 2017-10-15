@@ -8,40 +8,56 @@
 </template>
 
 <script>
+  import { bus } from '../main';
+
   export default {
-    props: ['manData', 'color'],
+    props: ['manData'],
     data() {
       return {
         isSelected: false,
-        color1: ""
       }
     },
     methods: {
       selected: function() {
 
-        this.manData.selected = !this.manData.selected;
-        this.manData.color = "#555";
-        console.log(this.manData);
-        this.color1 = "#777";
+        this.isSelected = !this.isSelected;
+        bus.$emit('selected', this.manData)
       },
       getGradeURL: function(n) {
         return "../src/assets/" + n.toString() + ".png";
+      },
+      unSelected: function(){
+        this.isSelected = false;
       }
 
     },
     computed: {
-      
+      color: function() {
+        this.manData.isSelectd = this.isSelected;
+        switch (this.manData.action) {
+          case '정비':
+            return this.isSelected ? "#BDBDBD" : "#424242";
+          case '대기':
+            return this.isSelected ? "#8BC34A" : "#558B2F";
+          case '작업':
+            return this.isSelected ? "#F44336" : "#C62828";
+          case '교육':
+            return this.isSelected ? "#2196F3" : "#1565C0";
+          case '휴가':
+            return this.isSelected ? "#607D8B" : "#263238";
+          default:
+            return "crimson"
+        }
+      }
     },
     created() {
-      this.manData.color = "crimson";
-      this.color1 = "#424242";
+      this.manData.unSelected = this.unSelected;
     }
   }
 </script>
 
 <style scoped lang="scss">
   div {
-    margin: 0 0 5px 0;
     border-radius: 5px;
     padding: 3px;
     cursor: pointer;
@@ -61,7 +77,7 @@
   }
 
   .detail {
-    font-size: 0.8em;
+    font-size: 1.0em;
   }
 
   img {
@@ -72,6 +88,5 @@
 
   .selected {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    background: #777;
   }
 </style>

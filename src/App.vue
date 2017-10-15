@@ -38,6 +38,8 @@ import Header from './components/Header.vue';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
+    max-width: 425px;
+    margin: 0 auto;
   }
 
   @media (max-width: 960px) {

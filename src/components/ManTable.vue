@@ -1,8 +1,6 @@
 <template>
   <div id="table-wrapper">
-    <div v-for="n in 4" class="cols">
-        <man v-for="manData in mans[n-1]" v-bind:manData="manData" v-bind:color="colorTable[manData.id]" v-bind:key="manData.id"></man>
-    </div>
+    <man v-for="manData in mans" v-bind:manData="manData" v-bind:style="cols(manData)" v-bind:key="manData.id"></man>
   </div>
 </template>
 
@@ -18,10 +16,18 @@
             return {
                 dataModel: [],
                 mans: [],
-                colorTable: {40:"#fff"}
+                manArray: [],
+                selected: new Set(),
             }
         },
         methods: {
+            cols: function(man) {
+                let numSquad = String(man.id)[1];
+                console.log(numSquad + "/" + String((parseInt(numSquad) + 1)));
+                return {
+                    "grid-column": numSquad + "/" + String((parseInt(numSquad) + 1))
+                };
+            }
 
         },
         computed: {
@@ -31,30 +37,33 @@
             this.$http.get('https://app-minidonut-web.firebaseio.com/platoon.json').then(function(data) {
                 return data.json()
             }).then(function(data) {
+                this.mans = data[Object.keys(data)[0]];
+                // this.mans.forEach(function(value) {
+                //     let numSquad = value.id.toString()[1];
 
-                let tmp = [[],[],[],[]];
-                console.log(this.dataModel);
-                console.log(this.colorTable);
-                this.dataModel = data[Object.keys(data)[0]];
-                console.log(this.dataModel);
-                this.dataModel.forEach(function(value, index) {
-
-                    Object.keys(value).forEach(function(key, subIndex) {
-                        let man = value[key];
-                        man.selected = false;
-                        console.log(this.colorTable);
-                        tmp[index][subIndex] = man;
-
-                    })
-                })
-
-                this.mans = tmp;
+                // });
             });
 
             //event register
-            bus.$on('btn', function(id) {
-                console.log(id);
-            })
+            bus.$on('btn', function(data) {
+                this.selected.forEach(function(value) {
+                    value.action = data.action;
+                    value.location = data.location;
+                    value.detail = data.detail;
+                    value.unSelected();
+                })
+                this.selected.clear();
+
+            }.bind(this));
+
+            bus.$on('selected', function(man) {
+                if (this.selected.has(man)) {
+                    this.selected.delete(man);
+                }
+                else {
+                    this.selected.add(man);
+                }
+            }.bind(this));
         }
     }
 </script>
@@ -67,17 +76,11 @@
         display: grid;
         background: #212121;
         grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: minmax(150px, auto);
-        grid-gap: 10px;
+        grid-auto-rows: minmax(50px, auto);
+        grid-column-gap: 10px;
+        grid-row-gap: 5px;
         padding: 10px;
-    }
-
-    .cols {
         color: #fff;
         text-align: center;
     }
 </style>
-
-
-
-
