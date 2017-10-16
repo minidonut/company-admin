@@ -1,8 +1,14 @@
 <template>
   <div id="table-wrapper">
-    <man v-for="manData in mans" v-bind:manData="manData" v-bind:style="cols(manData)" v-bind:key="manData.id"></man>
+    <man    v-for="(manData, index) in mans" 
+            v-bind:manData="manData" 
+            v-bind:style="manArray[index].gridStyle" 
+            v-bind:manAppendedData='manArray[index]' 
+            v-bind:key="manData.id">
+    </man>
   </div>
 </template>
+
 
 <script>
     import { bus } from '../main';
@@ -18,17 +24,18 @@
                 mans: [],
                 manArray: [],
                 selected: new Set(),
+                key: ''
             }
         },
         methods: {
-            cols: function(man) {
-                let numSquad = String(man.id)[1];
-                console.log(numSquad + "/" + String((parseInt(numSquad) + 1)));
-                return {
-                    "grid-column": numSquad + "/" + String((parseInt(numSquad) + 1))
-                };
+            updateDB: function() {
+                console.log("updateDB");
+                this.$http.put('https://app-minidonut-web.firebaseio.com/platoon.json', {
+                    '-Kw_Jmf_mpYutB5ZL9X2': this.mans
+                }).then(function(data) {
+                    console.log(data);
+                });
             }
-
         },
         computed: {
 
@@ -37,14 +44,38 @@
             this.$http.get('https://app-minidonut-web.firebaseio.com/platoon.json').then(function(data) {
                 return data.json()
             }).then(function(data) {
-                this.mans = data[Object.keys(data)[0]];
-                // this.mans.forEach(function(value) {
-                //     let numSquad = value.id.toString()[1];
+                this.key = Object.keys(data)[0]
 
-                // });
+                this.mans = data[this.key];
+                //initialize array of empty object
+
+                for (let i = 0; i < 39; i++) {
+                    this.manArray[i] = {};
+                }
+                
+                let count = 0,
+                    squad = 1;
+                    
+                this.mans.forEach(function(value, index) {
+                    
+                    this.manArray[index].squad = String(value.id)[1];
+                    
+                    count += 1;
+                    if (squad != this.manArray[index].squad) {
+                        squad = this.manArray[index].squad;
+                        count = 1;
+                    }
+
+                    this.manArray[index].gridStyle = {
+                        'grid-column': this.manArray[index].squad + "/" + String(parseInt(this.manArray[index].squad) + 1),
+                        'grid-row': count
+                    }
+                }.bind(this));
             });
 
-            //event register
+            //register event
+            
+            //Event from ChangeState.vue
             bus.$on('btn', function(data) {
                 this.selected.forEach(function(value) {
                     value.action = data.action;
@@ -53,9 +84,11 @@
                     value.unSelected();
                 })
                 this.selected.clear();
-
+                this.updateDB();
+                
             }.bind(this));
-
+            
+            //Event from Man.vue
             bus.$on('selected', function(man) {
                 if (this.selected.has(man)) {
                     this.selected.delete(man);

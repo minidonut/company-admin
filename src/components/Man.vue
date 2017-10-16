@@ -11,7 +11,7 @@
   import { bus } from '../main';
 
   export default {
-    props: ['manData'],
+    props: ['manData', 'manAppendedData'],
     data() {
       return {
         isSelected: false,
@@ -26,25 +26,40 @@
       getGradeURL: function(n) {
         return "../src/assets/" + n.toString() + ".png";
       },
-      unSelected: function(){
+      unSelected: function() {
         this.isSelected = false;
       }
 
     },
     computed: {
       color: function() {
-        this.manData.isSelectd = this.isSelected;
+        this.manAppendedData.isSelected = this.isSelected;
         switch (this.manData.action) {
-          case '정비':
-            return this.isSelected ? "#BDBDBD" : "#424242";
+
           case '대기':
             return this.isSelected ? "#8BC34A" : "#558B2F";
+
           case '작업':
             return this.isSelected ? "#F44336" : "#C62828";
           case '교육':
             return this.isSelected ? "#2196F3" : "#1565C0";
+          case '훈련':
+            return this.isSelected ? "#FFCA28" : "#FF8F00";
+
           case '휴가':
+            return this.isSelected ? "#9E9E9E" : "#424242";
+          case '정비':
+            return this.isSelected ? "#BDBDBD" : "#616161";
+          case '외진':
+            return this.isSelected ? "#E0E0E0" : "#757575";
+            
+          case '동문':
             return this.isSelected ? "#607D8B" : "#263238";
+          case '식기':
+            return this.isSelected ? "#78909C" : "#37474F";
+          case '배식':
+            return this.isSelected ? "#90A4AE" : "#455A64";
+            
           default:
             return "crimson"
         }
@@ -52,6 +67,7 @@
     },
     created() {
       this.manData.unSelected = this.unSelected;
+      this.manData.selected = this.selected;
     }
   }
 </script>
