@@ -28,9 +28,8 @@ export default {
 
 <style scoped lang="scss">
 div{
-    min-height: 50px;
     background: #212121;
-    padding: 25px;
+    padding: 10px;
     color: #fff;
 }
 </style>

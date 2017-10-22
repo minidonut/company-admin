@@ -30,6 +30,6 @@ export default {
 div{
     background: #212121;
     color: #fff;
-    padding: 20px;
+    padding: 10px;
 }
 </style>
