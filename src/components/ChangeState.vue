@@ -49,10 +49,10 @@
     },
     methods: {
       selectAll: function() {
-        console.log("selectAll");
+        bus.$emit("selectAll");
       },
       clearAll: function(){
-        console.log("clearAll");
+        bus.$emit("clearAll");
       },
       actionBtn: function(type) {
         this.action = type;

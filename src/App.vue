@@ -2,8 +2,6 @@
   <div id="app">
     <ca-header></ca-header>
     <hr>
-    <ca-summary></ca-summary>
-    <hr>
     <man-table></man-table>
     <hr>
     <change-state></change-state>
@@ -16,7 +14,7 @@
 <script>
 import ManTable from './components/ManTable.vue';
 import ChangeState from './components/ChangeState.vue';
-import Summary from './components/Summary.vue';
+
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 
@@ -25,7 +23,6 @@ import Footer from './components/Footer.vue';
     components:{
       'man-table' : ManTable,
       'change-state': ChangeState,
-      'ca-summary': Summary,
       'ca-header': Header,
       'ca-footer': Footer
     },

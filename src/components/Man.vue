@@ -19,17 +19,18 @@
     },
     methods: {
       selected: function() {
-
         this.isSelected = !this.isSelected;
         bus.$emit('selected', this.manData)
       },
       getGradeURL: function(n) {
         return "../src/assets/" + n.toString() + ".png";
       },
+      doSelected: function() {
+        this.isSelected = true;
+      },
       unSelected: function() {
         this.isSelected = false;
       }
-
     },
     computed: {
       color: function() {
@@ -52,20 +53,21 @@
             return this.isSelected ? "#BDBDBD" : "#616161";
           case '외진':
             return this.isSelected ? "#E0E0E0" : "#757575";
-            
+
           case '동문':
             return this.isSelected ? "#607D8B" : "#263238";
           case '식기':
             return this.isSelected ? "#78909C" : "#37474F";
           case '배식':
             return this.isSelected ? "#90A4AE" : "#455A64";
-            
+
           default:
             return "crimson"
         }
       }
     },
     created() {
+      this.manData.doSelected = this.doSelected;
       this.manData.unSelected = this.unSelected;
       this.manData.selected = this.selected;
     }

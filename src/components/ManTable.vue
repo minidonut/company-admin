@@ -1,11 +1,15 @@
 <template>
-  <div id="table-wrapper">
-    <man    v-for="(manData, index) in mans" 
-            v-bind:manData="manData" 
-            v-bind:style="manArray[index].gridStyle" 
-            v-bind:manAppendedData='manArray[index]' 
-            v-bind:key="manData.id">
-    </man>
+  <div>
+      <ca-summary v-bind:mans="mans"></ca-summary>
+      <hr>
+      <div id="table-wrapper">
+        <man    v-for="(manData, index) in mans" 
+                v-bind:manData="manData" 
+                v-bind:style="manArray[index].gridStyle" 
+                v-bind:manAppendedData='manArray[index]' 
+                v-bind:key="manData.id">
+        </man>
+      </div>
   </div>
 </template>
 
@@ -13,10 +17,12 @@
 <script>
     import { bus } from '../main';
     import man from './Man.vue';
+    import Summary from './Summary.vue';
 
     export default {
         components: {
-            'man': man
+            'man': man,
+            'ca-summary': Summary
         },
         data() {
             return {
@@ -24,7 +30,9 @@
                 mans: [],
                 manArray: [],
                 selected: new Set(),
-                key: ''
+                platoonKeys: ['-Kw_Jmf_mpYutB5ZL9X2', '-Kx8KPxpN4tLCO7DSzoj', '-Kx8KdCDPULOiSXpn4xe'],
+                platoon: []
+                
             }
         },
         methods: {
@@ -35,6 +43,18 @@
                 }).then(function(data) {
                     console.log(data);
                 });
+            },
+            selectAll: function(){
+                this.mans.forEach(function(v){
+                    this.selected.add(v);
+                    v.doSelected();
+                }.bind(this));
+            },
+            clearAll: function(){
+                this.mans.forEach(function(v){
+                    this.selected.clear();
+                    v.unSelected();
+                }.bind(this));
             }
         },
         computed: {
@@ -44,22 +64,22 @@
             this.$http.get('https://app-minidonut-web.firebaseio.com/platoon.json').then(function(data) {
                 return data.json()
             }).then(function(data) {
-                this.key = Object.keys(data)[0]
+                let key = Object.keys(data)[0]
 
-                this.mans = data[this.key];
+                this.mans = data[key];
                 //initialize array of empty object
 
-                for (let i = 0; i < 39; i++) {
+                for (let i = 0; i < this.mans.length; i++) {
                     this.manArray[i] = {};
                 }
-                
+
                 let count = 0,
                     squad = 1;
-                    
+
                 this.mans.forEach(function(value, index) {
-                    
+
                     this.manArray[index].squad = String(value.id)[1];
-                    
+
                     count += 1;
                     if (squad != this.manArray[index].squad) {
                         squad = this.manArray[index].squad;
@@ -74,7 +94,7 @@
             });
 
             //register event
-            
+
             //Event from ChangeState.vue
             bus.$on('btn', function(data) {
                 this.selected.forEach(function(value) {
@@ -85,9 +105,9 @@
                 })
                 this.selected.clear();
                 this.updateDB();
-                
+
             }.bind(this));
-            
+
             //Event from Man.vue
             bus.$on('selected', function(man) {
                 if (this.selected.has(man)) {
@@ -97,6 +117,28 @@
                     this.selected.add(man);
                 }
             }.bind(this));
+
+            bus.$on('summary', function(action) {
+
+                let result = this.mans.filter(function(man) {
+                    return man.action == action;
+                });
+                result.forEach(function(man){
+                    this.selected.add(man);
+                    man.doSelected();
+                }.bind(this));
+            }.bind(this));
+            
+            bus.$on('selectAll', function(){
+                this.selectAll();
+            }.bind(this));
+            
+            bus.$on('clearAll', function(){
+                this.clearAll();
+            }.bind(this));
+
+
+
         }
     }
 </script>
