@@ -69,7 +69,6 @@
     created() {
       this.manData.doSelected = this.doSelected;
       this.manData.unSelected = this.unSelected;
-      this.manData.selected = this.selected;
     }
   }
 </script>
@@ -79,6 +78,7 @@
     border-radius: 5px;
     padding: 3px;
     cursor: pointer;
+    overflow: hidden;
   }
 
   p {

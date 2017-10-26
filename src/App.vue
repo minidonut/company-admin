@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <ca-header></ca-header>
     <hr>
     <man-table></man-table>
     <hr>
@@ -14,7 +13,6 @@
 <script>
 import ManTable from './components/ManTable.vue';
 import ChangeState from './components/ChangeState.vue';
-
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 

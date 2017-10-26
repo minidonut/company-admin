@@ -20,7 +20,6 @@
     props: ['mans'],
     data() {
       return {
-        sum: 39,
         actionTable: {
           '대기': [0, "#558B2F"],
           '작업': [0, "#C62828"],
@@ -33,11 +32,11 @@
           '식기': [0, "#37474F"],
           '배식': [0, "#455A64"]
         }
-      }
+      };
     },
     methods: {
       selection: function(action){
-        bus.$emit("summary", action)
+        bus.$emit("summary", action);
       },
       selectAll: function(){
         bus.$emit("selectAll");
@@ -46,7 +45,6 @@
     },
     computed: {
       summary: function() {
-
         for (let key in this.actionTable) {
           this.actionTable[key][0] = 0;
         }
@@ -64,12 +62,12 @@
         }
 
         return result;
+      },
+      sum: function(){
+        return this.mans.length;
       }
-    },
-    created() {
-
     }
-  }
+  };
 </script>
 
 <style scoped lang="scss">
