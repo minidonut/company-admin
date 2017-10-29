@@ -8,7 +8,11 @@
       </div>
       <hr>
       <div v-show='currentTab==0'>
-          <company v-bind:platoons='platoons'></company>
+          <company v-bind:platoon1='platoon1'
+                   v-bind:platoon2='platoon2'
+                   v-bind:platoon3='platoon3'
+                   v-bind:platoons='platoons'>
+          </company>
       </div>
       <div v-show='currentTab==1'>
       <ca-summary v-bind:mans="platoon1"></ca-summary>
@@ -168,14 +172,17 @@
 
             //Event from ChangeState.vue
             bus.$on('btn', function(data) {
-                this.selected.forEach(function(value) {
-                    value.action = data.action;
-                    value.location = data.location;
-                    value.detail = data.detail;
-                    value.unSelected();
-                })
-                this.selected.clear();
-                this.updateDB();
+                if (this.currentTab != 0) {
+
+                    this.selected.forEach(function(value) {
+                        value.action = data.action;
+                        value.location = data.location;
+                        value.detail = data.detail;
+                        value.unSelected();
+                    })
+                    this.selected.clear();
+                    this.updateDB();
+                }
 
             }.bind(this));
 
@@ -190,9 +197,9 @@
             }.bind(this));
 
             bus.$on('summary', function(action) {
-                
+
                 let result = this.platoons[this.currentTab - 1].filter(function(man) {
-                    
+
                     return man.action == action;
                 });
                 result.forEach(function(man) {
@@ -202,11 +209,15 @@
             }.bind(this));
 
             bus.$on('selectAll', function() {
-                this.selectAll();
+                if (this.currentTab != 0) {
+                    this.selectAll();
+                }
             }.bind(this));
 
             bus.$on('clearAll', function() {
-                this.clearAll();
+                if (this.currentTab != 0) {
+                    this.clearAll();
+                }
             }.bind(this));
 
 
